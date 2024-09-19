@@ -1,5 +1,5 @@
 import React from 'react';
-import { ViewProps, ImageSourcePropType, NativeSyntheticEvent, ListRenderItemInfo } from 'react-native';
+import { ViewProps, ImageSourcePropType, NativeSyntheticEvent } from 'react-native';
 import { MapType, Animation, Point, DrivingInfo, MasstransitInfo, RoutesFoundEvent, Vehicles, CameraPosition, VisibleRegion, ScreenPoint, MapLoaded, InitialRegion, YandexLogoPosition, YandexLogoPadding } from '../interfaces';
 export interface ClusteredYaMapProps<T = any> extends ViewProps {
     userLocationIcon?: ImageSourcePropType;
@@ -10,7 +10,7 @@ export interface ClusteredYaMapProps<T = any> extends ViewProps {
     }>;
     renderMarker: (info: {
         point: Point;
-        data: ListRenderItemInfo<T>;
+        data: T;
     }, index: number) => React.ReactElement;
     clusterColor?: string;
     showUserPosition?: boolean;
