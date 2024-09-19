@@ -103,6 +103,31 @@
     }
 }
 
+- (void)setLogoPosition:(NSDictionary *)logoPosition {
+    YMKLogoHorizontalAlignment *horizontalAlignment = YMKLogoHorizontalAlignmentRight;
+    YMKLogoVerticalAlignment *verticalAlignment = YMKLogoVerticalAlignmentBottom;
+
+    if ([[logoPosition valueForKey:@"horizontal"] isEqual:@"left"]) {
+        horizontalAlignment = YMKLogoHorizontalAlignmentLeft;
+    } else if ([[logoPosition valueForKey:@"horizontal"] isEqual:@"center"]) {
+        horizontalAlignment = YMKLogoHorizontalAlignmentCenter;
+    }
+
+    if ([[logoPosition valueForKey:@"vertical"] isEqual:@"top"]) {
+        verticalAlignment = YMKLogoVerticalAlignmentTop;
+    }
+
+    [self.mapWindow.map.logo setAlignmentWithAlignment:[YMKLogoAlignment alignmentWithHorizontalAlignment:horizontalAlignment verticalAlignment:verticalAlignment]];
+}
+
+- (void)setLogoPadding:(NSDictionary *)logoPadding {
+    NSUInteger *horizontalPadding = [logoPadding valueForKey:@"horizontal"] != nil ? [RCTConvert NSUInteger:logoPadding[@"horizontal"]] : 0;
+    NSUInteger *verticalPadding = [logoPadding valueForKey:@"vertical"] != nil ? [RCTConvert NSUInteger:logoPadding[@"vertical"]] : 0;
+
+    YMKLogoPadding *padding = [YMKLogoPadding paddingWithHorizontalPadding:horizontalPadding verticalPadding:verticalPadding];
+    [self.mapWindow.map.logo setPaddingWithPadding:padding];
+}
+
 // utils
 + (UIColor*)colorFromHexString:(NSString*) hexString {
     unsigned rgbValue = 0;
@@ -148,6 +173,23 @@
     }
     [_reactSubviews removeObject:subview];
     [super removeMarkerReactSubview:subview];
+}
+
+- (void)onMapLoadedWithStatistics:(YMKMapLoadStatistics*)statistics {
+    if (self.onMapLoaded) {
+        NSDictionary *data = @{
+            @"renderObjectCount": @(statistics.renderObjectCount),
+            @"curZoomModelsLoaded": @(statistics.curZoomModelsLoaded),
+            @"curZoomPlacemarksLoaded": @(statistics.curZoomPlacemarksLoaded),
+            @"curZoomLabelsLoaded": @(statistics.curZoomLabelsLoaded),
+            @"curZoomGeometryLoaded": @(statistics.curZoomGeometryLoaded),
+            @"tileMemoryUsage": @(statistics.tileMemoryUsage),
+            @"delayedGeometryLoaded": @(statistics.delayedGeometryLoaded),
+            @"fullyAppeared": @(statistics.fullyAppeared),
+            @"fullyLoaded": @(statistics.fullyLoaded),
+        };
+        self.onMapLoaded(data);
+    }
 }
 
 -(UIImage*)clusterImage:(NSNumber*) clusterSize {

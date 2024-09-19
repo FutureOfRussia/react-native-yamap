@@ -8,7 +8,6 @@ import {
   ViewProps,
   ImageSourcePropType,
   NativeSyntheticEvent,
-  ListRenderItemInfo
 } from 'react-native';
 // @ts-ignore
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
@@ -38,7 +37,7 @@ export interface ClusteredYaMapProps<T = any> extends ViewProps {
   userLocationIcon?: ImageSourcePropType;
   userLocationIconScale?: number;
   clusteredMarkers: ReadonlyArray<{point: Point, data: T}>
-  renderMarker: (info: {point: Point, data: ListRenderItemInfo<T>}, index: number) => React.ReactElement
+  renderMarker: (info: {point: Point, data: T}, index: number) => React.ReactElement
   clusterColor?: string;
   showUserPosition?: boolean;
   nightMode?: boolean;
