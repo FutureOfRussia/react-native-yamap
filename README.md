@@ -147,8 +147,6 @@ type MasstransitVehicles = 'bus' | 'trolleybus' | 'tramway' | 'minibus' | 'subur
 
 type Vehicles = MasstransitVehicles | 'walk' | 'car';
 
-type MapType = 'none' | 'raster' | 'vector';
-
 
 interface DrivingInfo {
   time: string;
@@ -259,7 +257,6 @@ type YandexLogoPadding = {
 | maxFps | number | 60 | Максимальная частота обновления карты |
 | logoPosition | YandexLogoPosition | {} | Позиция логотипа Яндекса на карте |
 | logoPadding | YandexLogoPadding | {} | Отступ логотипа Яндекса на карте |
-| mapType | string | 'vector' | Тип карты |
 | mapStyle | string | {} | Стили карты согласно [документации](https://yandex.ru/dev/maps/mapkit/doc/dg/concepts/style.html) |
 
 #### Доступные методы для компонента **MapView**:
@@ -307,6 +304,7 @@ import { Marker } from 'react-native-yamap';
 | anchor | {  x:  number,  y:  number  } | Якорь иконки маркера. Координаты принимают значения от 0 до 1 |
 | zIndex | number | Отображение элемента по оси Z |
 | visible | boolean | Отображение маркера на карте |
+| handled | boolean | Включение(**false**)/отключение(**true**) всплытия события нажатия для родителя `default:true` |
 
 #### Доступные методы для примитива **Marker**:
 
@@ -334,6 +332,7 @@ import { Circle } from 'react-native-yamap';
 | strokeWidth | number | Толщина границы |
 | onPress | function | Действие при нажатии/клике |
 | zIndex | number | Отображение элемента по оси Z |
+| handled | boolean | Включение(**false**)/отключение(**true**) всплытия события нажатия для родителя `default:true` |
 
 ### Polyline
 
@@ -365,6 +364,7 @@ import { Polyline } from 'react-native-yamap';
 | gapLength | number | Длина разрыва между штрихами |
 | onPress | function | Действие при нажатии/клике |
 | zIndex | number | Отображение элемента по оси Z |
+| handled | boolean | Включение(**false**)/отключение(**true**) всплытия события нажатия для родителя `default:true` |
 
 ### Polygon
 
@@ -393,6 +393,7 @@ import { Polygon } from 'react-native-yamap';
 | innerRings | (Point[])[] | Массив полилиний, которые образуют отверстия в полигоне |
 | onPress | function | Действие при нажатии/клике |
 | zIndex | number | Отображение элемента по оси Z |
+| handled | boolean | Включение(**false**)/отключение(**true**) всплытия события нажатия для родителя `default:true` |
 
 ## Запрос маршрутов
 

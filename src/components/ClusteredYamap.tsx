@@ -13,7 +13,6 @@ import {
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 import CallbacksManager from '../utils/CallbacksManager';
 import {
-  MapType,
   Animation,
   Point,
   DrivingInfo,
@@ -42,7 +41,6 @@ export interface ClusteredYaMapProps<T = any> extends ViewProps {
   showUserPosition?: boolean;
   nightMode?: boolean;
   mapStyle?: string;
-  mapType?: MapType;
   onCameraPositionChange?: (event: NativeSyntheticEvent<CameraPosition>) => void;
   onCameraPositionChangeEnd?: (event: NativeSyntheticEvent<CameraPosition>) => void;
   onMapPress?: (event: NativeSyntheticEvent<Point>) => void;
